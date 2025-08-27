@@ -56,7 +56,7 @@ deps = [
 extras = ["all"]
 commands = [["pytest"]]
 passenv = ["ESCPOS_CAPABILITIES_PICKLE_DIR", "ESCPOS_CAPABILITIES_FILE", "CI", "TRAVIS", "TRAVIS_*", "APPVEYOR", "APPVEYOR_*", "CODECOV_*"]
-setenv = {PY_IGNORE_IMPORTMISMATCH = 1}
+setenv = {PY_IGNORE_IMPORTMISMATCH = "1"}
 
 [tool.tox.env.docs]
 base_python = "python"
