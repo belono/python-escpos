@@ -59,7 +59,7 @@ passenv = ["ESCPOS_CAPABILITIES_PICKLE_DIR", "ESCPOS_CAPABILITIES_FILE", "CI", "
 setenv = {PY_IGNORE_IMPORTMISMATCH = "1"}
 
 [tool.tox.env.docs]
-base_python = "python"
+base_python = ["python"]
 changedir = "doc"
 deps = [
     "sphinx>=7.2.3",
@@ -79,7 +79,7 @@ commands = [
 
 
 [tool.tox.env.flake8]
-base_python = "python"
+base_python = ["python"]
 deps = [
     "flake8",
     "flake8-docstrings",
@@ -87,7 +87,7 @@ deps = [
 commands = [["flake8"]]
 
 [tool.tox.env.mypy]
-base_python = "python"
+base_python = ["python"]
 deps = [
     "mypy",
     "types-six",
