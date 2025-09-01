@@ -93,7 +93,6 @@ deps = [
     "types-six",
     "types-mock",
     "types-PyYAML",
-    "types-appdirs",
     "types-Pillow",
     "types-pyserial",
     "types-pywin32>=306.0.0.6",
