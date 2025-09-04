@@ -26,20 +26,19 @@ module = ["pytest",
          ]
 ignore_missing_imports = true
 
-[tool.tox]
-envlist = ["py38", "py39", "py310", "py311", "py312", "py313", "docs", "flake8"]
 
-[tool.tox.gh-actions]
-python = """
-2.7: py27
-3.6: py36
-3.7: py37
-3.8: py38
-3.9: py39
-3.10: py310
-3.11: py311
-3.12: py312
-3.13: py313"""
+[tool.tox]
+requires = ["tox>=4.11", "tox-uv>=1.13"]
+envlist = ["3.9", "3.10", "3.11", "3.12", "3.13", "docs", "flake8", "mypy"]
+
+
+[tool.tox.gh.python]
+"3.13" = ["3.13", "docs", "flake8", "mypy"]
+"3.12" = ["3.12"]
+"3.11" = ["3.11"]
+"3.10" = ["3.10"]
+"3.9" = ["3.9"]
+
 
 [tool.tox.env_run_base]
 deps = [
@@ -85,6 +84,7 @@ deps = [
     "flake8-docstrings",
 ]
 commands = [["flake8"]]
+
 
 [tool.tox.env.mypy]
 base_python = ["python"]
