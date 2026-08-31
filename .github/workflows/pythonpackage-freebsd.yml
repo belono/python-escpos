@@ -44,6 +44,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with tox
         run: |
+          find /usr/local/lib /usr/lib /lib -name 'libcups.so*' 2>/dev/null
           tox --conf pyproject.toml
         env:
           ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
