@@ -21,6 +21,7 @@ jobs:
           usesh: true
           run: |
             pkg install -y cups graphviz enchant
+            find /usr/local/lib /usr/lib /lib -name 'libcups.so*' 2>/dev/null
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v7.0.0
@@ -44,7 +45,6 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with tox
         run: |
-          find /usr/local/lib /usr/lib /lib -name 'libcups.so*' 2>/dev/null
           tox --conf pyproject.toml
         env:
           ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
