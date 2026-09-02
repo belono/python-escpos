@@ -20,13 +20,14 @@ jobs:
         release: "15.0"
         usesh: true
         prepare: |
-          pkg install -y cups graphviz enchant
+          pkg install -y cups python3 graphviz enchant
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         # env:
         #   CPPFLAGS: -I/usr/local/include
         run: |
           uname -o
-          python3 -m pip install --upgrade pip
+          python3 --version
+          python -m pip install --upgrade pip
           pip install flake8 pytest tox tox-gh
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         
