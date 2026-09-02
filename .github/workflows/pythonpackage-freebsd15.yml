@@ -21,9 +21,9 @@ jobs:
         usesh: true
         prepare: |
           pkg install -y cups graphviz enchant
-          export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
-        env:
-          CPPFLAGS: -I/usr/local/include
+        #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+        # env:
+        #   CPPFLAGS: -I/usr/local/include
         run: |
           uname -o
           python -m pip install --upgrade pip
