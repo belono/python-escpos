@@ -20,7 +20,8 @@ jobs:
         release: "15.0"
         usesh: true
         prepare: |
-          pkg install -y cups python3 py312-pip graphviz enchant
+          pkg install -y cups python3 graphviz enchant
+          pip install wheel
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
           uname -o
