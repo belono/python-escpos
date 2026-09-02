@@ -21,12 +21,18 @@ jobs:
         usesh: true
         prepare: |
           pkg install -y cups graphviz enchant
-    # - name: Set up Python ${{ matrix.python-version }}
-    #   uses: actions/setup-python@v7.0.0
-    #   with:
-    #     python-version: ${{ matrix.python-version }}
+          export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+        env:
+          CPPFLAGS: -I/usr/local/include
+        run: |
+          uname -o
+          python -m pip install --upgrade pip
+          pip install flake8 pytest tox tox-gh
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
     - name: Install dependencies
       run: |
+        uname -o
         python -m pip install --upgrade pip
         pip install flake8 pytest tox tox-gh
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
