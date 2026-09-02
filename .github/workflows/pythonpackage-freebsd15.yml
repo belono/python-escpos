@@ -6,11 +6,18 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: vmactions/freebsd-vm@v1
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
     steps:
+    - name: Run FreeBSD CI
+      uses: vmactions/freebsd-vm@v1
+      with:
+        release: "15.0"
+        usesh: true
+        # run: |
+        #   pkg install -y cups graphviz enchant
     - uses: actions/checkout@v7
       with:
         submodules: 'recursive'
