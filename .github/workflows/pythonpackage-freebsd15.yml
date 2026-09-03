@@ -20,21 +20,20 @@ jobs:
         release: "15.0"
         usesh: true
         prepare: |
-          pkg install -y cups python3 py312-pip graphviz enchant
-          pip install wheel
+          pkg install -y rust python3 cups graphviz enchant
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
           uname -o
           python3 --version
-          python3 -m pip install --upgrade pip
-          pip install flake8 pytest tox tox-gh
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          cargo install --locked uv
+          uv python install --default ${{ matrix.python-version }}
         # env:
         #   CPPFLAGS: -I/usr/local/include
         
     - name: Install dependencies
       run: |
         uname -a
+        python3 --version
         python3 -m pip install --upgrade pip
         pip install flake8 pytest tox tox-gh
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
