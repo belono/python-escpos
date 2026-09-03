@@ -26,11 +26,12 @@ jobs:
           uname -o
           python3 --version
           cargo install --locked uv
+          export PATH="$PATH:/root/.cargo/bin"
           uv python list
           # uv python install ${{ matrix.python-version }}
-      env:
-        PATH: $PATH:/root/.cargo/bin
-      #   CPPFLAGS: -I/usr/local/include
+      # env:
+      #   PATH: $PATH:/root/.cargo/bin
+      # #   CPPFLAGS: -I/usr/local/include
         
     - name: Install dependencies
       run: |
