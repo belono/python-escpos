@@ -28,9 +28,9 @@ jobs:
           cargo install --locked uv
           uv python list
           # uv python install ${{ matrix.python-version }}
-        env:
-          PATH: $PATH:/root/.cargo/bin
-        #   CPPFLAGS: -I/usr/local/include
+      env:
+        PATH: $PATH:/root/.cargo/bin
+      #   CPPFLAGS: -I/usr/local/include
         
     - name: Install dependencies
       run: |
