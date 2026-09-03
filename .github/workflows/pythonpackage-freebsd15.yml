@@ -20,14 +20,14 @@ jobs:
         release: "15.0"
         usesh: true
         prepare: |
-          pkg install -y rust python3 cups graphviz enchant
+          pkg install -y py312-pip cups graphviz enchant
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
           uname -o
           python3 --version
-          cargo install --locked uv
-          export PATH="$PATH:/root/.cargo/bin"
-          uv python list
+          # cargo install --locked uv
+          # export PATH="$PATH:/root/.cargo/bin"
+          # uv python list
           # uv python install ${{ matrix.python-version }}
       # env:
       #   PATH: $PATH:/root/.cargo/bin
