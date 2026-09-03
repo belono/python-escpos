@@ -24,10 +24,11 @@ jobs:
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
           uname -o
-          python3 --version
+          python${{ matrix.python-version }} --version
           # cargo install --locked uv
           # export PATH="$PATH:/root/.cargo/bin"
           uv python list
+          uv python pin ${{ matrix.python-version }}
       # env:
       #   PATH: $PATH:/root/.cargo/bin
       # #   CPPFLAGS: -I/usr/local/include
@@ -35,10 +36,14 @@ jobs:
     - name: Install dependencies
       run: |
         uname -a
+        which python
+        which python3
+        python --version
         python3 --version
-        python3 -m pip install --upgrade pip
-        pip install flake8 pytest tox tox-gh
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        uv --version
+        # python3 -m pip install --upgrade pip
+        # pip install flake8 pytest tox tox-gh
+        # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     # - name: Install tox on FreeBSD
     #   run: |
     #     git clone https://github.com/tox/pyproject.git
