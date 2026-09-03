@@ -9,13 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['313']
+        python-version: ['312']
     steps:
     - uses: actions/checkout@v7
       with:
         submodules: 'recursive'
     - name: Run FreeBSD CI
       uses: vmactions/freebsd-vm@v1
+      env:
+        ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
       with:
         release: "15.0"
         usesh: true
@@ -24,33 +26,23 @@ jobs:
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
           uname -o
-          python --version
+          python3 --version
           # cargo install --locked uv
           # export PATH="$PATH:/root/.cargo/bin"
           uv python list
+          uv pip install --upgrade pip
+          uv pip install flake8 pytest tox tox-gh
+          if [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi
       # env:
       #   PATH: $PATH:/root/.cargo/bin
       # #   CPPFLAGS: -I/usr/local/include
-        
-    - name: Install dependencies
-      run: |
-        uname -a
-        which python
-        which python3
-        python --version
-        python3 --version
-        whereis uv
-        uv --version
-        # python3 -m pip install --upgrade pip
-        # pip install flake8 pytest tox tox-gh
-        # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     # - name: Install tox on FreeBSD
     #   run: |
     #     git clone https://github.com/tox/pyproject.git
     #     cd tox/pyproject
     #     pip install -e .
-    - name: Test with tox
-      run: |
-        tox --conf pyproject.toml
-      env:
-        ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
+    # - name: Test with tox
+    #   run: |
+    #     tox --conf pyproject.toml
+    #   env:
+    #     ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
