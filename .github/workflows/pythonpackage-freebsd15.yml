@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['312']
+        python-version: ['3.12']
+        py: ['312']
     steps:
     - uses: actions/checkout@v7
       with:
@@ -22,14 +23,16 @@ jobs:
         release: "15.0"
         usesh: true
         prepare: |
-          pkg install -y python3 py${{ matrix.python-version }}-uv cups graphviz enchant
+          pkg install -y python3 py312-uv cups graphviz enchant
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
           uname -o
           python3 --version
           # cargo install --locked uv
           # export PATH="$PATH:/root/.cargo/bin"
+          pkg install -y python${{ matrix.py }}
           uv python list
+          uv python pin ${{ matrix.python-version }}
           uv pip install --upgrade pip
           uv pip install flake8 pytest tox tox-gh
           if [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi
