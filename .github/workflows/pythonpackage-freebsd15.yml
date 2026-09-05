@@ -34,7 +34,7 @@ jobs:
           uv python pin ${{ matrix.python-version }}
           uv sync
           uv pip install flake8 pytest tox tox-gh
-          echo "-- CI/CD dependencies installed --""
+          echo "-- CI/CD dependencies installed --"
           if [ -f requirements.txt ]; then uv pip install --system -r requirements.txt; fi
       # env:
       #   PATH: $PATH:/root/.cargo/bin
