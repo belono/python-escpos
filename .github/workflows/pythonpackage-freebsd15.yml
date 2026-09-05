@@ -34,6 +34,9 @@ jobs:
           uv python list
           uv python pin ${{ matrix.python-version }}
           uv pip install --system flake8 pytest tox tox-gh
+          echo "-- CI/CD dependencies installed --"
+          git --version
+          echo "git checkout freebsd_build"
           if [ -f requirements.txt ]; then uv pip install --system -r requirements.txt; fi
       # env:
       #   PATH: $PATH:/root/.cargo/bin
