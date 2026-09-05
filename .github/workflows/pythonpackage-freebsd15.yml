@@ -19,6 +19,7 @@ jobs:
       uses: vmactions/freebsd-vm@v1
       env:
         ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
+        CPPFLAGS: -I/usr/local/include
       with:
         release: "15.0"
         usesh: true
