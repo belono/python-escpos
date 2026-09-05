@@ -37,7 +37,7 @@ jobs:
           echo "-- Installing CI/CD dependencies --"
           uv pip install --python ${{ matrix.python-version }} flake8 pytest tox tox-gh
           if [ -f requirements.txt ]; then uv pip install --python ${{ matrix.python-version }} -r requirements.txt; fi
-        run: |
+          echo "-- Test with tox --"
           uv run --python ${{ matrix.python-version }} tox --conf pyproject.toml
       # env:
       #   PATH: $PATH:/root/.cargo/bin
