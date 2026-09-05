@@ -31,12 +31,12 @@ jobs:
           python3 --version
           # cargo install --locked uv
           # export PATH="$PATH:/root/.cargo/bin"
+          echo "-- Syncing python version --"
+          uv python pin ${{ matrix.python-version }}
+          uv sync
           echo "-- Installing CI/CD dependencies --"
           uv pip install --python ${{ matrix.python-version }} flake8 pytest tox tox-gh
           if [ -f requirements.txt ]; then uv pip install --python ${{ matrix.python-version }} -r requirements.txt; fi
-          echo "-- Syncing python version --"
-          # uv python pin ${{ matrix.python-version }}
-          # uv sync
       # env:
       #   PATH: $PATH:/root/.cargo/bin
       # #   CPPFLAGS: -I/usr/local/include
