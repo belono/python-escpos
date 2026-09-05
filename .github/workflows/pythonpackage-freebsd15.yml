@@ -19,7 +19,7 @@ jobs:
       uses: vmactions/freebsd-vm@v1
       env:
         ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
-        CPPFLAGS: -I/usr/local/include
+        # CPPFLAGS: -I/usr/local/include
       with:
         release: "15.0"
         usesh: true
@@ -39,6 +39,7 @@ jobs:
           uv pip install --python ${{ matrix.python-version }} flake8 pytest tox tox-gh
           if [ -f requirements.txt ]; then uv pip install --python ${{ matrix.python-version }} -r requirements.txt; fi
           echo "-- Test with tox --"
+          export CPPFLAGS="-I/usr/local/include"
           uv run --python ${{ matrix.python-version }} tox --conf pyproject.toml
       # env:
       #   PATH: $PATH:/root/.cargo/bin
