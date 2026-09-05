@@ -32,8 +32,8 @@ jobs:
           # cargo install --locked uv
           # export PATH="$PATH:/root/.cargo/bin"
           uv python pin ${{ matrix.python-version }}
-          uv python list
-          # uv sync
+          # uv python list
+          uv sync
           uv pip install --system flake8 pytest tox tox-gh
           echo "-- CI/CD dependencies installed --"
           git --version
