@@ -23,7 +23,7 @@ jobs:
         release: "15.0"
         usesh: true
         prepare: |
-          pkg install -y git python3 py312-uv cups graphviz enchant
+          pkg install -y rust git python3 py312-uv cups graphviz enchant
           pkg install -y python${{ matrix.py }}
         #   export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
         run: |
