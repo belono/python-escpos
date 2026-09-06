@@ -61,3 +61,8 @@ jobs:
         flags: unittests
         name: coverage-tox-${{ matrix.python-version }}
         verbose: true
+    - name: Run examples
+      run: |
+        python examples/receipt.py
+        python examples/font_variations.py
+        python examples/block_text.py
