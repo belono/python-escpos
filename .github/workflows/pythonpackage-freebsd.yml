@@ -24,8 +24,6 @@ jobs:
         submodules: 'recursive'
     - name: Run FreeBSD CI
       uses: vmactions/freebsd-vm@v1
-      env:
-        ESCPOS_CAPABILITIES_FILE: /home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json
       with:
         release: '15.1'
         usesh: true
@@ -41,8 +39,10 @@ jobs:
           echo "-- Installing CI/CD dependencies --"
           uv pip install --python ${{ matrix.python-version }} flake8 pytest tox tox-gh
           if [ -f requirements.txt ]; then uv pip install --python ${{ matrix.python-version }} -r requirements.txt; fi
-          echo "-- Test with tox --"
+          echo "-- Export environment variables --"
           export CPPFLAGS="-I/usr/local/include"
+          export ESCPOS_CAPABILITIES_FILE="/home/runner/work/python-escpos/python-escpos/capabilities-data/dist/capabilities.json"
+          echo "-- Test with tox --"
           uv run --python ${{ matrix.python-version }} tox --conf pyproject.toml
           echo "-- Run examples --"
           uv run --python ${{ matrix.python-version }} examples/receipt.py
